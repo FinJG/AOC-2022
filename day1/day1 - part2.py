@@ -2,11 +2,16 @@ lis = []
 totals = []
 
 with open("input.txt") as i:
-    for loop in i.readlines():
-        if len(loop) > 1:
+    
+    for loop in i.readlines():      # loops through the file and adds
+        if len(loop) > 1:           # every line that isnt empty to a list
             lis.append(int(loop))
-        else:
-            totals.append(sum(lis))
-            lis = []
+            
+        else:                       # if a empty line is found the sum of
+            totals.append(sum(lis)) # the list is added to the "totals" list
+            lis = []                # and then original list is cleared
 
-print(sum(sorted(totals)[-3:]))
+            
+#sorts the list and prints the sum of the last 3 indexes
+print(sum(sorted(totals)[-3:])) 
+
