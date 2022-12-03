@@ -9,4 +9,4 @@ with open("input.txt") as i:
             totals.append(sum(lis))
             lis = []
 
-print(sorted(totals))
+print sorted(totals)
