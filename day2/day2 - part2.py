@@ -7,7 +7,7 @@ dic = {
     "B Z\n":9,  # and the corrosponding points that they give
     "C X\n":2,
     "C Y\n":6,  # the only change in part2 of this challenge
-    "C Z\n":7,  # is the values in the dictionary 
+    "C Z\n":7,  # are the values used in the dictionary 
 }
 
 score = 0
