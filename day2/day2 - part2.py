@@ -1,4 +1,4 @@
-dictt = {
+dic = {
     "A X\n":3,
     "A Y\n":4,
     "A Z\n":8,
@@ -11,7 +11,7 @@ dictt = {
 }
 
 score = 0
-with open("input.txt") as i:
-    for loop in i.readlines():
-        score += dictt["".join(loop)]
+with open("input.txt") as f:
+    for line in i.readlines():
+        score += dic[line]
 print(score)
