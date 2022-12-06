@@ -12,4 +12,4 @@ with open("input.txt") as f:
             totals.append(sum(lis))   # the list is added to the "totals" list
             lis = []                  # and then original list is cleared
 
-print(sorted(totals)[-1])   #sorts the list and prints the last index
+print(max(totals))   # prints the biggest index in the list
