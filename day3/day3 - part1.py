@@ -1,11 +1,14 @@
-lis = []
+score = 0
 
 with open("input.txt") as file:
     for line in file:
         half = len(line) // 2
-        for index in line[:half]:
-            if index in line[half:]:
-                lis.append(index)
+        for letter in line[:half]:
+            if letter in line[half:]:
+                if letter.islower():
+                    score += ord(letter) - 96
+                else:
+                    score += ord(letter) - 38
                 break
 
-print(sum([ord(i) - 96 if i.islower() else ord(i) - 38 for i in lis]))
+print(score)
