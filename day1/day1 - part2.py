@@ -1,9 +1,9 @@
 lis = []
 totals = []
 
-with open("input.txt") as i:
+with open("input.txt") as file:
     
-    for loop in i.readlines():      # loops through the file and adds
+    for loop in file.readlines():      # loops through the file and adds
         if len(loop) > 1:           # every line that isnt empty to a list
             lis.append(int(loop))
             
