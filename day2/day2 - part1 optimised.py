@@ -10,5 +10,4 @@ dic = {
     "C Z\n":6,
 }
 
-
 print(sum([dic[i] for i in open("input.txt")]))
