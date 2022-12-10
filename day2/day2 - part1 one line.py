@@ -1,1 +1,1 @@
-print(sum([((("XYZ".index(line.split(" ")[1]) - ("ABC".index(line.split(" ")[0]) - 1)) % 3) * 3) + "XYZ".index(line.split(" ")[1]) + 1 for line in open("input.txt").read().strip().splitlines()]))
+print(sum([(ord(line[2]) - 154 - ord(line[0])) % 3 * 3 + ord(line[2]) - 87 for line in open("input.txt")]))
