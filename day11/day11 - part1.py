@@ -17,10 +17,7 @@ def monkeypass(lis):
             ind = int(re.findall("\d+", line)[0])
 
         if line.startswith("  Operation"):
-            operation = re.findall("=.+", line)[0][2:].split()
-            num1 = operation[0]
-            num2 = operation[2]
-            operator = operation[1]
+            num1, operator, num2 = re.findall("=.+", line)[0][2:].split()
         
             for i, loop in enumerate(lis[ind]):
                 if num1 == "old":
@@ -36,15 +33,13 @@ def monkeypass(lis):
                 else:
                     lis[ind][i] = int(no1) + int(no2)
                     pass
+                
         if line.startswith("  Test"):
             divisor = re.findall("\d+", line)
-
         if line.startswith("    If true"):
             choice1 = int(re.findall("\d+", line)[0])
         if line.startswith("    If false"):
             choice2 = int(re.findall("\d+", line)[0])
-
-
             for i, num in enumerate(lis[ind]):
                 if not ind in dic.keys():
                     dic[ind] = 1
@@ -57,13 +52,10 @@ def monkeypass(lis):
                 else:
                     lis[choice2].append(multiple)
                 lis[ind][i] = "w"
-            
             lis = [[i for i in x if i != "w"] for x in lis]
     return lis
 
-        
-
-
+       
 for loop in range(20):
     lis = monkeypass(lis)
 
