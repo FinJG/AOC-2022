@@ -1,63 +1,51 @@
-import re
+from re import findall
 dic = {}
-lis = []
 with open("input.txt") as file:
     f = file.read().strip().splitlines()
     for line in f:
         if line.startswith("Monkey"):
-            ind = int(re.findall("\d+", line)[0])
-            lis.append([])
+            ind = int(findall("\d+", line)[0])
+            dic[ind] = {"count":0, "values":[], "test":0, "true":0, "false":0}
         if line.startswith("  Starting"):
-            for num in re.findall("\d+", line):
-                lis[ind].append(num)    
+            for num in findall("\d+", line):
+                dic[ind]["values"].append(int(num)) 
+        if line.startswith("  Test"):
+            dic[ind]["test"] = int(findall("\d+", line)[0])
+        if line.startswith("    If true"):
+            dic[ind]["true"] = int(findall("\d+", line)[0])
+        if line.startswith("    If false"):
+            dic[ind]["false"] = int(findall("\d+", line)[0])
 
-def monkeypass(lis):
+def monkeypass():
     for line in f:
         if line.startswith("Monkey"):
-            ind = int(re.findall("\d+", line)[0])
-
+            ind = int(findall("\d+", line)[0])
         if line.startswith("  Operation"):
-            num1, operator, num2 = re.findall("=.+", line)[0][2:].split()
-        
-            for i, loop in enumerate(lis[ind]):
-                if num1 == "old":
-                    no1 = loop
-                else:
-                    no1 = num1
+            operator, num2 = findall("=.+", line)[0][2:].split()[1:]
+            for i, loop in enumerate(dic[ind]["values"]):
                 if num2 == "old":
                     no2 = loop
                 else:
-                    no2 = num2
+                    no2 = int(num2)
                 if operator == "*":
-                    lis[ind][i] = int(no1) * int(no2)
+                    dic[ind]["values"][i] = loop * no2
                 else:
-                    lis[ind][i] = int(no1) + int(no2)
-                    pass
-                
-        if line.startswith("  Test"):
-            divisor = re.findall("\d+", line)
-        if line.startswith("    If true"):
-            choice1 = int(re.findall("\d+", line)[0])
-        if line.startswith("    If false"):
-            choice2 = int(re.findall("\d+", line)[0])
-            for i, num in enumerate(lis[ind]):
-                if not ind in dic.keys():
-                    dic[ind] = 1
-                else:
-                    dic[ind] += 1
-                multiple = int(num)//3
-                lis[ind][i] = multiple
-                if (multiple / int(divisor[0])).is_integer():
-                    lis[choice1].append(multiple)
-                else:
-                    lis[choice2].append(multiple)
-                lis[ind][i] = "w"
-            lis = [[i for i in x if i != "w"] for x in lis]
-    return lis
+                    dic[ind]["values"][i] = loop + no2
 
-       
+            for i, num in enumerate(dic[ind]["values"]):
+                multiple = num//3
+                if (multiple / dic[ind]["test"]).is_integer():
+                    dic[dic[ind]["true"]]["values"].append(multiple)
+                else:
+                    dic[dic[ind]["false"]]["values"].append(multiple)
+
+                dic[ind]["count"] += 1  
+                dic[ind]["values"][i] = "x"
+            for loop in dic.keys():
+                dic[loop]["values"] = [i for i in dic[loop]["values"] if i != "x"]
+
 for loop in range(20):
-    lis = monkeypass(lis)
+    monkeypass()
 
-mostpass = sorted([i for i in dic.values()])[-2:]
+mostpass = sorted([i for i in [dic[key]["count"] for key in dic.keys()]])[-2:]
 print(mostpass[0] * mostpass[1])
