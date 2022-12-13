@@ -31,14 +31,11 @@ def monkeypass():
                     dic[ind]["values"][i] = loop * no2
                 else:
                     dic[ind]["values"][i] = loop + no2
-
-            for i, num in enumerate(dic[ind]["values"]):
-                multiple = num//3
+                multiple = dic[ind]["values"][i]//3
                 if (multiple / dic[ind]["test"]).is_integer():
                     dic[dic[ind]["true"]]["values"].append(multiple)
                 else:
                     dic[dic[ind]["false"]]["values"].append(multiple)
-
                 dic[ind]["count"] += 1  
                 dic[ind]["values"][i] = "x"
             for loop in dic.keys():
