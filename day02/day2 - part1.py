@@ -2,9 +2,9 @@ dic = {
     "A X":4,
     "A Y":8,
     "A Z":3,
-    "B X":1,  # this dictionary contains every pissible
+    "B X":1,  # this dictionary contains every possible
     "B Y":5,  # hand that can be played and the
-    "B Z":9,  # corrosponding points that they give
+    "B Z":9,  # corresponding points that they give
     "C X":7,
     "C Y":2,
     "C Z":6,
